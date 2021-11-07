@@ -10,10 +10,11 @@ let boxLeft = box.offsetLeft
 let dino = document.getElementById('dino')
 let score = document.getElementById('score')
 let realScore = 0
-let highScore = document.getElementById('highScore')
+let highscore = document.getElementById('highScore')
 let highestScore = 0
 let spaceClicked = true // to prevent from again jumping while it is jumping
 let gameAlreadyOver = false // to prevent the other obstacle from moving
+let doit;
 
 //Function to jump the dino
 function jump() {
@@ -84,11 +85,12 @@ document.body.onkeyup = function(e) {
 /* Game Functions */
 //Function to start the game
 function start(){
-	
+	gameAlreadyOver = false
+	spaceClicked = true
 	realScore = 0
 	score.innerHTML = realScore
-	let doit = setInterval(move, 3000)
-
+	doit = setInterval(move, 3000)
+}
 
 function move(){// Function for creating and moving
 	let div = document.createElement('div')
@@ -105,15 +107,7 @@ function move(){// Function for creating and moving
 		if(gameOver()) {
 			gameAlreadyOver = true
 			document.getElementById("dino").getElementsByTagName("img")[0].src="fail.png";
-			clearInterval(movingDiv)
-			clearInterval(doit)
-			// Update high score
-			if(realScore > highestScore) {
-				highestScore = realScore
-				highScore.innerHTML = 'Highest Score : ' + highestScore
-			}
-			reset()
-			throw new Error()
+			setTimeout(reset, 3000)
 		}
 		if(!gameAlreadyOver) {
 			if(margin > boxWidth) {
@@ -125,7 +119,6 @@ function move(){// Function for creating and moving
 			margin += 20 //20 right here effects the speed
 			realScore++
 			score.innerHTML = realScore
-			console.log(div.offsetWidth)
 		}
 	}
 
@@ -136,12 +129,17 @@ function move(){// Function for creating and moving
 
 	function reset(){ // To remove the obs after 3 sec
 		document.getElementById("dino").getElementsByTagName("img")[0].src="jumper.jpeg";
+		clearInterval(movingDiv)
+		clearInterval(doit)
 		let obs = document.getElementsByClassName('obs') // remove all obs
 		while(obs[0]) {
 			obs[0].parentNode.removeChild(obs[0])
 		}
-		gameAlreadyOver = false
-	spaceClicked = true
+		// Update high score
+		if(realScore > highestScore) {
+			highestScore = realScore
+			highScore.innerHTML = 'Highest Score : ' + highestScore
+		}
+		
 	}
-}
 }

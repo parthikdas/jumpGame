@@ -107,6 +107,8 @@ function move(){// Function for creating and moving
 		if(gameOver()) {
 			gameAlreadyOver = true
 			document.getElementById("dino").getElementsByTagName("img")[0].src="fail.png";
+			clearInterval(movingDiv)
+			clearInterval(doit)
 			setTimeout(reset, 3000)
 		}
 		if(!gameAlreadyOver) {
@@ -129,8 +131,6 @@ function move(){// Function for creating and moving
 
 	function reset(){ // To remove the obs after 3 sec
 		document.getElementById("dino").getElementsByTagName("img")[0].src="jumper.jpeg";
-		clearInterval(movingDiv)
-		clearInterval(doit)
 		let obs = document.getElementsByClassName('obs') // remove all obs
 		while(obs[0]) {
 			obs[0].parentNode.removeChild(obs[0])
@@ -140,6 +140,5 @@ function move(){// Function for creating and moving
 			highestScore = realScore
 			highScore.innerHTML = 'Highest Score : ' + highestScore
 		}
-		
 	}
 }

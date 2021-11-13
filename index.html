@@ -8,6 +8,11 @@
 	<title>Jump Bruh..</title>
 </head>
 <style>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
 	body{
 		min-height: 100vh;
 		min-width: 100vw;
@@ -20,15 +25,17 @@
 		color: #fff;
 	}
 	.box{
+		margin-top: .5rem;
     	height:50vh;
-        width:80vw;
+		width: fit-content;
+        width:calc(100% - 20%);
         border:1px solid rgb(155, 154, 154);
         position: relative;
 		overflow: hidden
     }
     .obs{
-    	height: 6vh;
-    	width: 4vw;
+    	height: 11%;
+    	width: 9%;
     	position: absolute;
     	right: -4vw;
     	bottom: 0;
@@ -37,8 +44,8 @@
 		border-radius: 10rem;
     }
 	.dino{
-		height: 8vh;
-    	width: 5vw;
+		height: 15%;
+    	width: 10%;
 		background-color: black;
 		position: absolute;
     	left: 10vw;
@@ -52,33 +59,46 @@
 		max-height: 100%;
 		max-width: 100%;
 	}
+	
 	#score, #highScore{
 		font-size: 2rem;
 	}
 	button{
-		height: 2rem;
-		width: 6rem;
-		font-size: 1.5rem;
+		height: 10%;
+		width: fit-content;
+		font-size: 1.8rem;
+		padding: .1rem;
 		margin:.5rem;
 		cursor: pointer;
 		border: none;
 	}
 	#video{
 		position: absolute;
-		right: 0;
-		top: 0;
+		right: .2rem;
+		top: .2rem;
 	}
 	#canvas{
 		position: absolute;
 		border:1px solid rgb(155, 154, 154);
-		right: 0;
-		top: 0;
+		right: .2rem;
+		top: .2rem;
 		z-index: 1;
+	}
+	@media screen and (max-width: 850px){
+		#highScore {
+			margin-top: 40%;
+		}
+		#score, #highScore{
+			font-size: 1.2rem;
+		}
+		button {
+			font-size: 1.2rem;
+		}
 	}
 </style>
 <body>
 	<video id="video" autoplay></video>
-	<canvas id="canvas" height="250" width="350"></canvas>
+	<canvas id="canvas" height="150" width="150"></canvas>
 	<p id="highScore">Highest Score : 0</p>
 	<p id="score">0</p>
 	<div class="box" id="box">

@@ -51,7 +51,7 @@ let ctx = canvas.getContext('2d')
 
 const videoStream = () => {
     navigator.mediaDevices.getUserMedia({ // getUserMedia is a API and takes an object as an argument 
-        video: {width: 350, height: 250},
+        video: {width: 150, height: 150},
         audio: false // make it true if u also want audio
     })
     .then((stream) => { // and this returns a stream object which is a media stream object
@@ -60,20 +60,20 @@ const videoStream = () => {
 }
 const detectFaces = async () => { // this is function is asynchronus
     const prediction = await model.estimateFaces(video, false) // 1st arg is input, 2nd is if we want to return tensor or not So her we dont want tensor we want actual values of coordinates
-    ctx.drawImage(video, 0, 0, 350, 250)
+    ctx.drawImage(video, 0, 0, 150, 150)
     // a line to tell the limit
     ctx.beginPath();
     ctx.lineWidth = '2'
     ctx.strokeStyle = 'red'
-    ctx.moveTo(0, 100);
-    ctx.lineTo(350, 100);
+    ctx.moveTo(0, 60);
+    ctx.lineTo(150, 60);
     ctx.stroke();
 
     prediction.forEach(pred => { // pred corresponds to 1 face
         // plot nose point, its in landmark array
         ctx.fillStyle = 'yellow'
         ctx.fillRect(pred.landmarks[2][0], pred.landmarks[2][1], 5, 5)
-        if(pred.landmarks[2][1] < 100) jump() // if limit touched jump
+        if(pred.landmarks[2][1] < 60) jump() // if limit touched jump
     })
 }
 videoStream()
@@ -85,6 +85,7 @@ video.addEventListener('loadeddata', async () =>{ // After the data is loaded th
 /* Game Functions */
 //Function to start the game
 function start(){
+	alert('Move your head up or use spacebar / up arrow key to jump')
 	gameAlreadyOver = false
 	spaceClicked = true
 	realScore = 0
